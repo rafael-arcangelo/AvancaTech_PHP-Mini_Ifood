@@ -1,0 +1,21 @@
+# Configurações locais
+.env
+
+# Arquivos de conexão com banco
+config/db.php
+config/database.php
+
+# Uploads de usuários (se usar)
+uploads/
+uploads/*
+
+# Logs
+*.log
+
+# Cache e temporários
+/tmp
+/cache
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
