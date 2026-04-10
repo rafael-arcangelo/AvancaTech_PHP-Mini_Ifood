@@ -1,5 +1,6 @@
 <?php
-    require_once("../config/auth.php");
+    require_once __DIR__ . "/../config/auth.php";
+    require_once __DIR__ . "/../config/db.php";
 
     $nome = htmlspecialchars($_SESSION["usuario_nome_pessoa"]);
     $n_restaurante = htmlspecialchars($_SESSION["usuario_nome_restaurante"]);
