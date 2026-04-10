@@ -1,7 +1,8 @@
 <?php
     session_start();
 
-    if(!isset($_SESSION["id_usuario"])) { 
+    if(!isset($_SESSION["id_usuario"])) {
+        header("Refresh: 3; url=../public/login.php"); 
 ?>
 
         <!DOCTYPE html>
@@ -21,7 +22,7 @@
 
                     <section>
                         <p>Você precisa fazer login para acessar esta página.</p>
-                        <p>Redirecionando para o login em 3 segundos...</p>
+                        <p>Redirecionando para o login em <strong>03 segundos</strong>...</p>
                     </section>
 
                     <footer>
@@ -32,8 +33,6 @@
         </html>
     
 <?php
-
-        header("Refresh: 3; url=../public/login.php");
         exit;
     }
 ?>
