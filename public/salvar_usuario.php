@@ -13,27 +13,23 @@
     $senha2 = trim($_POST["senha2"]);
     $img_restaurante = trim($_POST["img_logo"]);
 
+    $senha = $senha1;
+
+    if(empty($img_restaurante)) {
+        $img_restaurante = "https://cdn-icons-png.flaticon.com/512/4722/4722865.png";
+    }
+
     if ($senha1 !== $senha2) {
         die("As senhas não conferem.");
     }
-    $senha = $senha1;
-    
-    if($nome == "" || $n_restaurante == "" || $email == "" || $senha == "") {
+       
+    if(empty($nome) || empty($n_restaurante) || empty($email) || empty($senha)) {
         die("Todos os campos são obrigatórios.");
     }
 
-    if (strlen($nome) < 3) {
-        die("Nome deve ter ao menos 3 caracteres.");
-    }
-
-    if (strlen($n_restaurante) < 5) {
-        die("Nome do restaurante deve ter ao menos 5 caracteres.");
-    }
-
-    if (strlen($senha) < 8) {
-        die("Senha deve ter ao menos 8 caracteres.");
-    }
-
+    if (strlen($nome) < 3) die("Nome deve ter ao menos 3 caracteres.");
+    if (strlen($n_restaurante) < 5) die("Nome do restaurante deve ter ao menos 5 caracteres.");
+    if (strlen($senha) < 8) die("Senha deve ter ao menos 8 caracteres.");
 
     $nome = mysqli_real_escape_string($conexao, $nome);
     $n_restaurante = mysqli_real_escape_string($conexao, $n_restaurante);
@@ -46,36 +42,42 @@
         die("Este e-mail já está cadastrado");
     }
 
-    $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+    $senha_hash = password_hash($senha1, PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO usuario (nome_pessoa, nome_restaurante, email, senha, imagem_restaurante)
             VALUES ('$nome','$n_restaurante','$email','$senha_hash','$img_restaurante')";
 
     if(mysqli_query($conexao, $sql)) {
-        echo "
-            <DOCTYPE html>
-            <html lang='pt-BR|'>
-                <head>
-                    <meta charset='UTF-8'>
-                    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                    <title>Usuário Cadastrado</title>
-                    <link rel='stylesheet' href='../css/style.css'>
-                </head>
+        ?>
+        
+        <!DOCTYPE html>
+        <html lang="pt-BR">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Sucesso - Explora Food</title>
+                <link rel="stylesheet" href="../css/style.css">
+            </head>
 
-                <body>
-                    <div class='container'>
-                        <h1>Usuário $nome e Restaurante $n_restaurante cadastrados com sucesso</h1>
-                        <div class='links'>
-                            <a href='painel.php'>Voltar ao Painel</a>
-                        </div>
-                    </div>
-                </body>
-            </html>
-        ";
-    } else {
-        echo "Erro ao cadastrar: " . mysqli_error($conexao);
-    }
+            <body>
+                <main class="container">
+                    <header>
+                        <h1>Bem vindo ao Explora Food!</h1>
+                    </header>
+                    <section>
+                        <p>O restaurante <strong><?= $n_restaurante ?> foi cadastrado com sucesso!</strong></p>
+                    </section>
+                    <footer>
+                        <a href="login.php" class="btn">Voltar ao Login</a>
+                    </footer>
+                </main>
+            </body>
+        </html>
+        
+        <?php
+            } else {
+                echo "Erro ao cadastrar: " . mysqli_error($conexao);
+            }
 
     desconecta($conexao);
 ?>
-

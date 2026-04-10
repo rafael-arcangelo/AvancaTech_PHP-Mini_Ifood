@@ -3,15 +3,18 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cadastrar Usuário</title>
+        <title>Explora Food - Cadastrar Usuário</title>
         <link rel="stylesheet" href="../css/style.css">
     </head>
 
     <body>
-        <div class="container">
-            <h1>Cadastro de Usuário</h1>
+        <main class="container">
+            <header>
+                <h1>Cadastro de Usuário</h1>
+            </header>
+
             <form action="salvar_usuario.php" method="POST">
-                <label for="nome_pessoa">Nome</label>
+                <label for="nome_pessoa">Seu nome completo</label>
                 <input type="text" name="nome_pessoa" id="nome_pessoa" required>
 
                 <label for="nome_restaurante">Nome do Restaurante</label>
@@ -20,20 +23,21 @@
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email" required>
 
-                <label for="senha1">Digite a Senha</label>
+                <label for="senha1">Digite sua Senha</label>
                 <input type="password" name="senha1" id="senha1" required>
 
-                <label for="senha2">Digite a Senha novamente</label>
+                <label for="senha2">Digite sua senha novamente</label>
                 <input type="password" name="senha2" id="senha2" required>
 
-                <label for="img_logo">Insira o logo do restaurante</label>
-                <input type="text" name="img_logo" id="img_logo">
+                <label for="img_logo">Insira a URL da logo do restaurante</label>
+                <input type="text" name="img_logo" id="img_logo" placeholder="http://exemplo.com/imagem.png">
 
-                <button type="submit">Cadastrar Usuário</button>
+                <button type="submit">Finalizar Cadastro</button>
             </form>
-            <div>
+
+            <footer>
                 <a href="login.php">Voltar ao Login</a>
-            </div>
-        </div>
+            </footer>
+        </main>
     </body>
 </html>
