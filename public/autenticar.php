@@ -29,7 +29,7 @@
             $_SESSION["usuario_email"] = $usuario["email"];
             $_SESSION["usuario_imagem_restaurante"] = $usuario["imagem_restaurante"];
             
-            header("Location: painel.php");
+            header("Location: ../admin/painel.php");
             exit;
         }
     }

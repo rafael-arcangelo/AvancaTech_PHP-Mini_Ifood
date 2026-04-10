@@ -49,7 +49,7 @@
             </main>
 
             <footer>
-                <a href="logout.php" onclick="return confirm('Tem certeza que deseja sair?')">Sair do Sistema</a>
+                <a href="../public/logout.php" onclick="return confirm('Tem certeza que deseja sair?')">Sair do Sistema</a>
             </footer>
         </div>
     </body>
