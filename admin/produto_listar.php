@@ -49,7 +49,7 @@
                 ?>
                         <section class="sem-dados">
                             <p>Seu cardápio ainda está vazio.</p>
-                            <a href='../admin/produto_novo.php' class="btn">Cadastrar primeira refeição</a>;
+                            <a href='../admin/produto_novo.php' class="btn">Cadastrar primeira refeição</a>
                         </section>
                 <?php        
                     else:
@@ -74,8 +74,8 @@
                             $n_produto = htmlspecialchars($p["nome_produto"]);
                             $img_produto = htmlspecialchars($p["imagem_produto"]);
                             $preco = number_format(floatval($p["preco"]), 2, ",", ".");
-                            $disp = intval($p["disponibilidade"] == 1) ? "Disponível" : "Indisponível";
-                            $classe_disp = intval($p["disponibilidade"] == 1) ? "status-on" : "status-off";
+                            $disp = ((int)$p["disponibilidade"] == 1) ? "Disponível" : "Indisponível";
+                            $classe_disp = ((int)$p["disponibilidade"] == 1) ? "status-on" : "status-off";
                 ?>
 
                             <article class="card-produto">
@@ -89,7 +89,7 @@
                                 <div class="card-info">
                                     <h3><?= $n_produto ?></h3>
                                     <p class="preco">R$ <?= $preco ?></p>
-                                    <span class="tag" <?= $classe_disp ?><?= $disp ?>></span>
+                                    <span class="tag <?= $classe_disp ?>"><?= $disp ?></span>
 
                                     <div class="btn-acoes">
                                         <a href="../admin/produto_editar.php?id=<?= $id_produto ?>" class="link-edit">Editar</a>
@@ -102,8 +102,14 @@
                             </article>
                 <?php
                         endwhile;
+
+                        if(!empty($cat_atual)) {
                 ?>
-                        </div></section> <?php endif; ?>
+                            </div></section> 
+                <?php 
+                        }
+                        endif;
+                 ?>
 
             </main>
             <?php
