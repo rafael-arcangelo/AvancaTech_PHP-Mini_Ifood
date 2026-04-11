@@ -93,10 +93,13 @@
 
                                     <div class="btn-acoes">
                                         <a href="../admin/produto_editar.php?id=<?= $id_produto ?>" class="link-edit">Editar</a>
-                                        <a href="../admin/produto_excluir.php?id=<?= $id_produto ?>" 
-                                        class="link-delete" 
-                                        onclick="return confirm('Tem certeza que deseja excluir <?= $n_produto ?>?');">Excluir
-                                        </a>                            
+                                        <form action="../admin/produto_excluir.php" method="POST" class="form-excluir">
+                                            <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
+                                            <button type="submit" class="btn-link-delete" 
+                                                    onclick="return confirm('Tem certeza que deseja excluir <?= $n_produto ?>?');"
+                                                    >Excluir
+                                            </button>
+                                        </form>                           
                                     </div>
                                 </div>
                             </article>
