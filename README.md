@@ -1,8 +1,16 @@
-# 🍔 Explora Food (Mini iFood)
+# 🌍🍔 World Food (Mini iFood)
 
 Projeto desenvolvido como trabalho prático para o curso AvançaTech – PHP com MySQL.
 
 O Explora Food é uma plataforma simplificada de gestão de cardápios online. O sistema permite que proprietários de restaurantes se cadastrem para gerenciar seus produtos em uma área administrativa exclusiva, simulando as funcionalidades de back-office de grandes aplicativos de delivery.
+
+---
+
+## 🚀 Novidades da Versão 2.0
+
+- Vitrine Dinâmica: Página inicial que lista automaticamente todos os restaurantes cadastrados.
+- Cardápio Público: Visualização de pratos organizada por categorias (Entradas, Principais, Bebidas, etc.).
+- Layout "Clássico": Interface de cardápio em lista, otimizada para leitura linear com suporte a descrições detalhadas.
 
 ---
 
