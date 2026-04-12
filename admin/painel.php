@@ -25,7 +25,7 @@
         <div class="container">
             <header>
                 <img 
-                    src="<?= $img_logo ?: '../img/dwfault.png'; ?>" 
+                    src="<?= $img_logo ?: 'https://bit.ly/4mlzujj'; ?>" 
                     alt="Logo do <?= $n_restaurante; ?>"
                     class="logo"
                     loading="lazy">
@@ -44,7 +44,6 @@
                     <h2>Gerenciamento do Cardápio</h2>
                     <a href="produto_novo.php">Cadastrar novo prato</a>
                     <a href="produto_listar.php">Listar pratos cadastrados</a>
-                    <a href="produto_editar.php">Editar pratos cadastrados</a>                    
                 </nav>
             </main>
 
