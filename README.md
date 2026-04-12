@@ -16,11 +16,15 @@ O Explora Food é uma plataforma simplificada de gestão de cardápios online. O
 
 ## 🚀 Funcionalidades Implementadas
 
-- Gestão de Acesso: Sistema de login seguro com sessões PHP.
-- Área do Restaurante: Painel administrativo restrito para usuários autenticados.
-- CRUD de Produtos: Gestão completa de refeições (Criação, Listagem, Edição e Exclusão).
-- Segurança de Dados: Vinculação estrita entre produtos e seus donos (um usuário não acessa os dados de outro).
-- UX Dinâmica: Pré-carregamento de dados em formulários e confirmações de segurança (pop-ups).
+1 Área do Cliente (Pública)
+ - Exploração: Navegação por todos os restaurantes da plataforma.
+ - Cardápio Inteligente: Visualização de pratos com preços formatados e agrupamento automático por categoria.
+ - Design Responsivo: Interface adaptada para dispositivos móveis e desktop.
+
+2 Área do Administrador (Restrita)
+ - Gestão de Perfil: Cadastro e edição de dados do restaurante (nome, logo, etc.).
+ - Controle de Inventário: CRUD completo de produtos (refeições) com controle de disponibilidade.
+ - Segurança: Autenticação via sessões PHP e proteção de dados entre diferentes usuários.
 
 ---
 
@@ -63,8 +67,6 @@ O Explora Food é uma plataforma simplificada de gestão de cardápios online. O
 
 ## 🛠️ Em Desenvolvimento (Roadmap)
 
-- [ ] Implementação da Vitrine Pública de Restaurantes.
-- [ ] Visualização do cardápio individual por cliente.
 - [ ] Filtros de busca por categoria na área administrativa.
 - [ ] Refatoração para melhoria de performance SQL.
 
