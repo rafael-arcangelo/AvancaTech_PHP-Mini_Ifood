@@ -43,7 +43,7 @@
                 <nav class="links">
                     <h2>Gerenciamento do Cardápio</h2>
                     <a href="produto_novo.php">Cadastrar novo prato</a>
-                    <a href="produto_listar.php">Listar pratos cadastrados</a>
+                    <a href="produto_listar.php">Listar Refeições</a>
                 </nav>
             </main>
 
