@@ -52,9 +52,9 @@
 
     <body>
         <nav class="navbar">
-            <div class="logo-wfood">World Foods!</div>
+            <div class="logo-wfood">World Foods</div>
             <div class="nav-links">
-                <a href="index.php" class="btn-link">Voltar para a Vitrine</a>
+                <a href="index.php" class="btn-nav">Voltar para a Vitrine</a>
             </div>
         </nav>
         
@@ -83,19 +83,19 @@
                             endif;
                 ?>
                 
-                    <div class="card-item-lista">
-                        <div class="detalhes-produto">
-                            <h3><?= htmlspecialchars($refeicao['nome_produto']) ?></h3>
-                            <p class="descricao-prod"><?= htmlspecialchars($refeicao['descricao']) ?></p>
-                            <p class="valor-prod">R$ <?= number_format($refeicao['preco'], 2, ',', '.') ?></p>
-                        </div>
-
-                        <?php if ($refeicao['imagem_produto']): ?>
-                            <div class="foto-produto-container">
-                                <img src="<?= htmlspecialchars($refeicao['imagem_produto']) ?>" alt="Foto da refeição">
+                        <article class="card-item-lista">
+                            <div class="detalhes-produto">
+                                <h3><?= htmlspecialchars($refeicao['nome_produto']) ?></h3>
+                                <p class="descricao-prod"><?= htmlspecialchars($refeicao['descricao']) ?></p>
+                                <p class="valor-prod">R$ <?= number_format($refeicao['preco'], 2, ',', '.') ?></p>
                             </div>
-                        <?php endif; ?>
-                    </div>
+
+                            <?php if ($refeicao['imagem_produto']): ?>
+                                <div class="foto-produto-container">
+                                    <img src="<?= htmlspecialchars($refeicao['imagem_produto']) ?>" alt="Foto da refeição" loading="lazy">
+                                </div>
+                            <?php endif; ?>
+                        </article>
 
                 <?php 
                         endwhile; 
@@ -109,7 +109,8 @@
         </main>
 
         <footer class="footer-simples">
-            <p>World Foods - Desenvolvido por Rafael Arcangelo</p>
+            <p><b>World Foods - Explore o mundo da culinária</b></p>
+            <p>Desenvolvido por Rafael Arcangelo</p>
         </footer>
     </body>
 </html>
