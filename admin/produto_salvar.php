@@ -43,7 +43,7 @@
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Explora Food - Refeição Salva</title>
+            <title>World Foods - Refeição Salva</title>
             <link rel="stylesheet" href="../css/style.css">
         </head>
 
@@ -55,10 +55,15 @@
                 </header>
 
                 <section class="links-sucesso">
-                    <a href='produto_novo.php' class="btn">Cadastrar outra refeição</a>
-                    <a href='produto_listar.php' class="btn">Ver refeições cadastradas</a>
-                    <a href='painel.php' class="btn">Voltar ao Painel</a>                
+                    <a href='../admin/produto_novo.php' class="btn-nav">Cadastrar outra refeição</a>
+                    <a href='../admin/produto_listar.php' class="btn-nav">Ver refeições cadastradas</a>
+                    <a href='../admin/painel.php' class="btn-nav">Voltar ao Painel</a>                
                 </section>
+
+                <footer>
+                <p><b>World Foods - Explore o mundo da culinária</b></p>
+                <p>Desenvolvido por Rafael Arcangelo</p>
+                </footer>
             </main>
         </body>
     </html>

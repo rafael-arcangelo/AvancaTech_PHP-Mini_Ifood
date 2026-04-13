@@ -17,7 +17,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Painel de <?= $n_restaurante; ?></title>
+        <title>World Foods - Painel de <?= $n_restaurante; ?></title>
         <link rel="stylesheet" href="../css/style.css">
     </head>
 
@@ -42,13 +42,15 @@
             <main>
                 <nav class="links">
                     <h2>Gerenciamento do Cardápio</h2>
-                    <a href="produto_novo.php">Cadastrar novo prato</a>
-                    <a href="produto_listar.php">Listar Refeições</a>
+                    <a href="produto_novo.php" class="btn_nav">Cadastrar novo prato</a>
+                    <a href="produto_listar.php" class="btn-nav">Listar Refeições</a>
                 </nav>
             </main>
 
             <footer>
-                <a href="../public/logout.php" onclick="return confirm('Tem certeza que deseja sair?')">Sair do Sistema</a>
+                <a href="../public/logout.php" class="btn-excluir" onclick="return confirm('Tem certeza que deseja sair?')">Sair do Sistema</a>
+                <p><b>World Foods - Explore o mundo da culinária</b></p>
+                <p>Desenvolvido por Rafael Arcangelo</p>
             </footer>
         </div>
     </body>

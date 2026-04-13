@@ -20,9 +20,9 @@
 
     <body>
         <nav class="navbar">
-            <div class="logo-wfood">World Foods!</div>
+            <div class="logo-wfood">World Foods</div>
             <div class="nav-links">
-                <a href="../public/login.php" class="btn-login">Acesse o painel</a>
+                <a href="../public/login.php" class="btn-nav">Acesse o painel</a>
             </div>
         </nav>
 
@@ -31,39 +31,49 @@
                 <h1>Bem-vindo ao World Foods!</h1>
                 <p>Escolha um restaurante e descubra pratos do mundo</p>
             </header>
-                <section class="vitrine">
-                    <?php if ($resultado && mysqli_num_rows($resultado) > 0) : ?>
-                        <div class="tab_restaurantes">
-                            <?php while ($restaurante = mysqli_fetch_assoc($resultado)) : ?>
-                                <?php
-                                    $img_restaurante = trim($restaurante['imagem_restaurante']);
-                                    if (empty($img_restaurante)) {
-                                        $img_restaurante = "https://bit.ly/4mlzujj";
-                                    }
-                                ?>
 
-                                <div class="card-restaurante">
-                                    <img 
-                                        src="<?= htmlspecialchars($img_restaurante) ?>"
-                                        alt="Logo do restaurante <?= htmlspecialchars($restaurante['nome_restaurante']) ?>"
-                                    >
+            <section class="vitrine">
+                <?php if ($resultado && mysqli_num_rows($resultado) > 0) : ?>
+                    <div class="tab-restaurantes">
+                        
+                        <?php while ($restaurante = mysqli_fetch_assoc($resultado)) : ?>
+                            
+                            <?php
+                                $img_restaurante = trim($restaurante['imagem_restaurante']);
+                                if (empty($img_restaurante)) {
+                                    $img_restaurante = "https://bit.ly/4mlzujj";
+                                }
+                            ?>
 
-                                    <h3><?= htmlspecialchars($restaurante['nome_restaurante']) ?></h3>
+                            <div class="card-restaurante">
+                                <img 
+                                    src="<?= htmlspecialchars($img_restaurante) ?>"
+                                    alt="Logo do restaurante <?= htmlspecialchars($restaurante['nome_restaurante']) ?>"
+                                >
 
-                                    <a 
-                                        href="../public/cardapio.php?id=<?= $restaurante['id_usuario'] ?>" 
-                                        class="btn-ver-cardapio"
-                                    >
-                                        Cardápio
-                                    </a>
-                                </div>
+                                <h3><?= htmlspecialchars($restaurante['nome_restaurante']) ?></h3>
 
-                            <?php endwhile; ?>
-                        </div>
-                    <?php else : ?>
-                        <p>Nenhum restaurante cadastrado.</p>
-                    <?php endif; ?>
-                </section>
+                                <a 
+                                    href="../public/cardapio.php?id=<?= $restaurante['id_usuario'] ?>" 
+                                    class="btn-nav"
+                                >
+                                    Cardápio
+                                </a>
+                            </div>
+
+                        <?php endwhile; ?>
+                    </div>
+                
+                <?php else : ?>
+                    <p>Nenhum restaurante cadastrado.</p>
+                
+                <?php endif; ?>
+            </section>
+
+            <footer>
+                <p><b>World Foods - Explore o mundo da culinária</b></p>
+                <p>Desenvolvido por Rafael Arcangelo</p>
+            </footer>
         </main>
     </body>
 </html>

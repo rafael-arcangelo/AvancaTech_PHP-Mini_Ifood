@@ -31,7 +31,7 @@
         }
 
     } else {
-        header("Location: produto_listar.php");
+        header("Location: ../admin/produto_listar.php");
         exit;
     }
 

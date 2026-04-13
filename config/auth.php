@@ -11,7 +11,7 @@
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <meta http-equiv="refresh" content="3;url=../public/login.php">
-                <title>Acesso Negado</title>
+                <title>World Foods - Acesso Negado</title>
                 <link rel="stylesheet" href="../css/style.css">
             </head>
 
@@ -27,7 +27,9 @@
                     </section>
 
                     <footer>
-                        <p><a href="../public/login.php">Clique aqui se não for redirecionado</a></p>
+                        <p><a href="../public/login.php" class="btn-nav">Clique aqui se não for redirecionado</a></p>
+                        <p><b>World Foods - Explore o mundo da culinária</b></p>
+                        <p>Desenvolvido por Rafael Arcangelo</p>
                     </footer>
                 </main>
             </body>

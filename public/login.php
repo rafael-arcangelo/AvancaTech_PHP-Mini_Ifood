@@ -12,7 +12,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Explora Food - Login Administrativo</title>
+        <title>World Foods - Login Administrativo</title>
         <link rel="stylesheet" href="../css/style.css">
     </head>
 
@@ -34,19 +34,25 @@
                     ?>
                 </div>
             <?php endif; ?>
-
+            
             <form action="autenticar.php" method="POST">
-                <label for="email">E-mail</label>
-                <input type="email" name="email" id="email" required>
+                <div class="form-grupo">
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
 
-                <label for="senha">Senha</label>
-                <input type="password" name="senha" id="senha" required>
-                
-                <button type="submit">Entrar</button>
+                <div class="form-grupo">
+                    <label for="senha">Senha</label>
+                    <input type="password" name="senha" id="senha" required>
+                </div>
+
+                <button type="submit" class="btn-nav">Entrar</button>
             </form>
             
             <footer>
-                <a href="cad_usuario.php">Criar conta</a>
+                <a href="../public/usuario_novo.php" class="btn-nav">Criar conta</a>
+                <p><b>World Foods - Explore o mundo da culinária</b></p>
+                <p>Desenvolvido por Rafael Arcangelo</p>
             </footer>
         </main>
     </body>

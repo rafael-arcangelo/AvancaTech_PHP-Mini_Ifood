@@ -38,7 +38,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Explora Food - Editar Refeição</title>
+        <title>World Foods - Editar Refeição</title>
         <link rel="stylesheet" href="../css/style.css">
     </head>
 
@@ -91,7 +91,7 @@
                 </div>
 
                 <div class="form-grupo">
-                    <label for="descricao">Descrição detalhada:</label><br>
+                    <label for="descricao">Descrição detalhada:</label>
                     <textarea 
                         id="descricao" 
                         name="descricao" 
@@ -99,12 +99,14 @@
                         required><?= $descricao ?></textarea>
                 </div>
 
-                <button type="submit" class="btn">Salvar alterações</button>
+                <button type="submit" class="btn-nav">Salvar alterações</button>
             </form>
 
             <footer class="links">
-                <a href="../admin/produto_listar.php">Cancelar e Voltar</a>
-                <a href="../admin/painel.php">Voltar ao Painel</a>
+                <a href="../admin/produto_listar.php" class="btn-excluir">Cancelar e Voltar</a>
+                <a href="../admin/painel.php" class="btn-nav">Voltar ao Painel</a>
+                <p><b>World Foods - Explore o mundo da culinária</b></p>
+                <p>Desenvolvido por Rafael Arcangelo</p>
             </footer>
         </main>
     </body>

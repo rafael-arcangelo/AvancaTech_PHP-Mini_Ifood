@@ -34,6 +34,6 @@
         }
     }
 
-    header("location: login.php?erro=1");
+    header("location: ../public/login.php?erro=login");
     exit;
 ?>

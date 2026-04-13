@@ -24,7 +24,8 @@
         die("Todos os campos são obrigatórios e o preço deve ser maior que 0.");
     }
 
-    if (strlen($n_refeicao) < 3) die("Nome deve ter ao menos 3 caracteres.");
+    if (strlen($n_refeicao) < 3) 
+        die("Nome deve ter ao menos 3 caracteres.");
 
     $n_refeicao = mysqli_real_escape_string($conexao, $n_refeicao);
     $categoria = mysqli_real_escape_string($conexao, $categoria);
@@ -53,7 +54,7 @@
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Explora Food - Refeição Atualizada</title>
+            <title>World Foods - Refeição Atualizada</title>
             <link rel="stylesheet" href="../css/style.css">
         </head>
 
@@ -65,9 +66,15 @@
                 </header>
 
                 <section class="links-sucesso">
-                    <a href='../admin/produto_listar.php' class="btn">Ver refeições cadastradas</a>
-                    <a href='../admin/painel.php' class="btn-outline">Voltar ao Painel</a>                
+                    <a href='../admin/produto_listar.php' class="btn-nav">Ver refeições cadastradas</a>
+                    <a href='../admin/painel.php' class="btn-nav">Voltar ao Painel</a>                
                 </section>
+
+                <footer>
+                    <a href="../public/logout.php" class="btn-excluir" onclick="return confirm('Tem certeza que deseja sair?')">Sair do Sistema</a>
+                    <p><b>World Foods - Explore o mundo da culinária</b></p>
+                    <p>Desenvolvido por Rafael Arcangelo</p>
+                </footer>
             </main>
         </body>
     </html>

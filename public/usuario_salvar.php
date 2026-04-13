@@ -55,20 +55,24 @@
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Sucesso - Explora Food</title>
+                <title>World Foods - Sucesso ao cadastrar</title>
                 <link rel="stylesheet" href="../css/style.css">
             </head>
 
             <body>
                 <main class="container">
                     <header>
-                        <h1>Bem vindo ao Explora Food!</h1>
+                        <h1>Bem vindo ao World Foods!</h1>
                     </header>
+
                     <section>
                         <p>O restaurante <strong><?= $n_restaurante ?> foi cadastrado com sucesso!</strong></p>
                     </section>
+
                     <footer>
-                        <a href="login.php" class="btn">Voltar ao Login</a>
+                        <a href="../public/login.php" class="btn-nav">Voltar ao Login</a>
+                        <p><b>World Foods - Explore o mundo da culinária</b></p>
+                        <p>Desenvolvido por Rafael Arcangelo</p>
                     </footer>
                 </main>
             </body>
