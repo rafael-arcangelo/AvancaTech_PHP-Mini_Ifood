@@ -1,9 +1,18 @@
 <?php
+    $t_pagina = "Usuário Salvo!";
+
+    include "../public/header.php";
+
     require_once __DIR__ . "/../config/db.php";
     $conexao = conecta();
 
     if ($_SERVER["REQUEST_METHOD"] !="POST") {
-        die("Acesso Inválido");
+        echo 
+            "<div class='error-msg'>
+                <p><strong>ACESSO INVÁLIDO.</strong></p>
+            </div>";  
+        include "../public/footer.php";
+        exit;
     }
 
     $nome = trim($_POST["nome_pessoa"]);
@@ -20,11 +29,21 @@
     }
 
     if ($senha1 !== $senha2) {
-        die("As senhas não conferem.");
+        echo 
+            "<div class='error-msg'>
+                <p><strong>As senhas não conferem.</strong></p>
+            </div>";  
+        include "../public/footer.php";
+        exit;
     }
        
     if(empty($nome) || empty($n_restaurante) || empty($email) || empty($senha)) {
-        die("Todos os campos são obrigatórios.");
+        echo 
+            "<div class='error-msg'>
+                <p><strong>Todos os campos são obrigatórios.</strong></p>
+            </div>";  
+        include "../public/footer.php";
+        exit;
     }
 
     if (strlen($nome) < 3) die("Nome deve ter ao menos 3 caracteres.");
@@ -39,7 +58,12 @@
     $sql_email_check = "SELECT id_usuario FROM usuario WHERE email = '$email'";
     $rslt_email_check = mysqli_query($conexao, $sql_email_check);
     if(mysqli_num_rows($rslt_email_check) > 0) {
-        die("Este e-mail já está cadastrado");
+        echo 
+            "<div class='error-msg'>
+                <p><strong>Este e-mail já está cadastrado.</strong></p>
+            </div>";  
+        include "../public/footer.php";
+        exit;
     }
 
     $senha_hash = password_hash($senha1, PASSWORD_DEFAULT);
@@ -48,40 +72,25 @@
             VALUES ('$nome','$n_restaurante','$email','$senha_hash','$img_restaurante')";
 
     if(mysqli_query($conexao, $sql)) {
-        ?>
+?>
         
-        <!DOCTYPE html>
-        <html lang="pt-BR">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>World Foods - Sucesso ao cadastrar</title>
-                <link rel="stylesheet" href="../css/style.css">
-            </head>
+<header>
+    <h1>Bem vindo ao World Foods!</h1>
+</header>
 
-            <body>
-                <main class="container">
-                    <header>
-                        <h1>Bem vindo ao World Foods!</h1>
-                    </header>
+<section>
+    <p>O restaurante <strong><?= $n_restaurante ?> foi cadastrado com sucesso!</strong></p>
+</section>
 
-                    <section>
-                        <p>O restaurante <strong><?= $n_restaurante ?> foi cadastrado com sucesso!</strong></p>
-                    </section>
+<?php
+        include "../public/footer.php";
 
-                    <footer>
-                        <a href="../public/login.php" class="btn-nav">Voltar ao Login</a>
-                        <p><b>World Foods - Explore o mundo da culinária</b></p>
-                        <p>Desenvolvido por Rafael Arcangelo</p>
-                    </footer>
-                </main>
-            </body>
-        </html>
-        
-        <?php
             } else {
-                echo "Erro ao cadastrar: " . mysqli_error($conexao);
+                echo 
+                    "<div class='error-msg'>
+                        <p><strong>Erro ao cadastrar: " . mysqli_error($conexao) . "</strong></p>
+                    </div>";  
+                include "../public/footer.php";
+                exit;
             }
-
-    desconecta($conexao);
 ?>
