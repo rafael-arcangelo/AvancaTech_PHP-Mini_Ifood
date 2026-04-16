@@ -3,7 +3,6 @@ session_start();
 require_once __DIR__ . "/../config/db.php";
 $conexao = conecta();
 
-// Definir o tema para a classe do body
 $tema_classe = (isset($_SESSION['tema']) && $_SESSION['tema'] == 'escuro') ? 'tema-escuro' : '';
 ?>
 <!DOCTYPE html>
@@ -27,12 +26,17 @@ $tema_classe = (isset($_SESSION['tema']) && $_SESSION['tema'] == 'escuro') ? 'te
                 
                 <div class="nav-links-principais">
                     <a href="../public/index.php">Início</a>
-                    <a href="../public/login.php">Login Adm</a>
+                    <a href="../admin/painel.php">Painel</a>
                 </div>
                 
+                <div class="nav-login">
+                    <p class="txt-nav-login">Olá, <b>visitante!</b></p>
+                    <a class="btn-entrar" href="../public/login.php">Entrar</a>
+                </div>
+
                 <div class="nav-links-uteis">
                     <a class="btn-tema" href="../public/tema_alternar.php">
-                        <?= (isset($_SESSION['tema']) && $_SESSION['tema'] == 'escuro') ? '☀️ Modo Claro' : '🌙 Modo Escuro' ?>
+                        <?= (isset($_SESSION['tema']) && $_SESSION['tema'] == 'escuro') ? '☀️ Claro' : '🌙 Escuro' ?>
                     </a>
                 </div>
                 

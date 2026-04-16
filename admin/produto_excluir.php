@@ -1,14 +1,20 @@
 <?php 
     require_once __DIR__ . "/../config/auth.php";
-    require_once __DIR__ . "/../config/db.php";
-    $conexao = conecta();
+
+    $t_pagina = "Excluir refeição";
+    include "../admin/header_auth.php";
 
     $id_usuario = intval($_SESSION["id_usuario"]);
 
      if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (!isset($_POST["id_produto"])) {
-            die("ID do produto não informado.");
+            echo 
+                "<div class='error-msg'>
+                    <p><strong>ACESSO INVÁLIDO.</strong></p>
+                </div>";  
+            include "../public/footer.php";
+            exit;
         }
 
         $id_produto = intval($_POST["id_produto"]);
@@ -21,13 +27,23 @@
             
             if (mysqli_affected_rows($conexao) > 0) {
                 header("Location: ../admin/produto_listar.php?msg=excluido");
-                exit;
             } else {
-                die("Erro: Produto não encontrado ou você não tem permissão.");
+                echo 
+                    "<div class='error-msg'>
+                        <p><strong>Erro: Produto não encontrado ou você não tem permissão.</strong></p>
+                    </div>";  
+                include "../public/footer.php";
+                exit;
             }
 
         } else {
             die("Erro técnico ao excluir: " . mysqli_error($conexao));
+                echo 
+                    "<div class='error-msg'>
+                        <p><strong>Erro: Produto não encontrado ou você não tem permissão.</strong></p>
+                    </div>";  
+                include "../public/footer.php";
+                exit;
         }
 
     } else {
@@ -35,5 +51,5 @@
         exit;
     }
 
-    desconecta($conexao);
+  include "../public/footer.php";
 ?>

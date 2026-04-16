@@ -1,10 +1,16 @@
 <?php 
     require_once __DIR__ . "/../config/auth.php";
-    require_once __DIR__ . "/../config/db.php";
-    $conexao = conecta();
+
+    $t_pagina = "Editar refeição";
+    include "../admin/header_auth.php";
 
     if(!isset($_GET["id"])) {
-        die("ID do produto não informado");
+        echo 
+            "<div class='error-msg'>
+                <p><strong>ID do produto não informado</strong></p>
+            </div>";  
+        include "../public/footer.php";
+        exit;
     }
 
     $id_produto = intval($_GET["id"]);
@@ -16,13 +22,23 @@
     
     $resultado = mysqli_query($conexao, $sql);
     if(!$resultado) {
-        die("Erro ao buscar produto: " . mysqli_error($conexao));
+        echo 
+            "<div class='error-msg'>
+                <p><strong>Erro ao buscar produto: " . mysqli_error($conexao) . "</strong></p>
+            </div>";  
+        include "../public/footer.php";
+        exit;
     }
 
     $produto = mysqli_fetch_assoc($resultado);
 
     if(!$produto) {
-        die("Produto não encontrado ou não tem permissão para editar.");
+        echo 
+            "<div class='error-msg'>
+                <p><strong>Produto não encontrado ou não tem permissão para editar.</strong></p>
+            </div>";  
+        include "../public/footer.php";
+        exit;
     }
 
     $n_produto = htmlspecialchars($produto["nome_produto"]);
@@ -33,21 +49,10 @@
     $disp_atual = intval($produto["disponibilidade"]);
 ?>
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>World Foods - Editar Refeição</title>
-        <link rel="stylesheet" href="../css/style.css">
-    </head>
-
-    <body>
-        <main class="container">
-            <header>
+            <header class="">
                 <h1>Editar refeição</h1>
-                <p>Editar refeição <strong><?= $n_produto ?></strong></p>
             </header>
+            <br>
 
             <form action="../admin/produto_atualizar.php" method="POST">
                 <input type="hidden" name="id_produto" value="<?= $id_produto; ?>">
@@ -73,8 +78,8 @@
                     <input type="number" name="preco" id="preco" step="0.01" min="0" value="<?= $preco ?>" required>
                 </div>
 
-                <div class="form-grupo">
-                <p>A Refeição está disponivel para venda?</p>    
+                <label>A Refeição está disponivel para venda?</label> 
+                <div class="form-grupo-radio">
                 <div class="item-radio">
                         <input type="radio" id="disp_sim" name="disponibilidade" value="1" <?= $disp_atual == 1 ? 'checked' : '' ?>>
                         <label for="disp_sim">Disponível</label>
@@ -84,6 +89,7 @@
                         <label for="disp_nao">Não Disponível</label> 
                     </div>
                 </div>
+                <br>
 
                 <div class="form-grupo">
                     <label for="img_refeicao">Insira a URL da foto da refeição</label>
@@ -99,19 +105,11 @@
                         required><?= $descricao ?></textarea>
                 </div>
 
-                <button type="submit" class="btn-nav">Salvar alterações</button>
+                <button class="btn-nav" type="submit">Salvar</button>
+                <button class="btn-excluir" type="button" onclick= "location.href='../admin/produto_listar.php'">Cancelar</button>
             </form>
-
-            <footer class="links">
-                <a href="../admin/produto_listar.php" class="btn-excluir">Cancelar e Voltar</a>
-                <a href="../admin/painel.php" class="btn-nav">Voltar ao Painel</a>
-                <p><b>World Foods - Explore o mundo da culinária</b></p>
-                <p>Desenvolvido por Rafael Arcangelo</p>
-            </footer>
-        </main>
-    </body>
-</html>
+            
 
 <?php
-    desconecta($conexao);
+    include "../public/footer.php";
 ?>

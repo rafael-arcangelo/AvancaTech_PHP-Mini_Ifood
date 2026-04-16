@@ -33,12 +33,12 @@ $tema_classe = (isset($_SESSION['tema']) && $_SESSION['tema'] == 'escuro') ? 'te
 
                 <div class="nav-login-auth">
                     <p class="txt-nav-login">Olá, <b><?= $nome ?></b>!</p>
-                    <a class="btn-entrar" href="../public/login.php">Sair</a>
+                    <a class="btn-entrar" href="../public/logout.php">Sair</a>
                 </div>
                 
                 <div class="nav-links-uteis">
                     <a class="btn-tema" href="../public/tema_alternar.php">
-                        <?= (isset($_SESSION['tema']) && $_SESSION['tema'] == 'escuro') ? '☀️ Modo Claro' : '🌙 Modo Escuro' ?>
+                        <?= (isset($_SESSION['tema']) && $_SESSION['tema'] == 'escuro') ? '☀️ Claro' : '🌙 Escuro' ?>
                     </a>
                 </div>
                 

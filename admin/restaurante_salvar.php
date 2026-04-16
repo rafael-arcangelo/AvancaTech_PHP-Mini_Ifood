@@ -1,6 +1,6 @@
 <?php
     $t_pagina = "Usuário Salvo!";
-
+    session_start();
     include "../admin/header_auth.php";
 
     require_once __DIR__ . "/../config/db.php";

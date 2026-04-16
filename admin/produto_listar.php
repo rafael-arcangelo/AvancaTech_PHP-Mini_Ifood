@@ -1,129 +1,92 @@
+
 <?php
-    require_once __DIR__ . "/../config/auth.php";
-    require_once __DIR__ . "/../config/db.php";
-    $conexao = conecta();
+require_once __DIR__ . "/../config/auth.php";
 
-    $id_usuario = intval($_SESSION["id_usuario"]);
-    $n_restaurante = htmlspecialchars(trim($_SESSION["usuario_nome_restaurante"]));
+$t_pagina = "Cardápio";
+include "../admin/header_auth.php";
 
-    $sql = "SELECT id_produto, nome_produto, categoria, preco, disponibilidade, imagem_produto
-            FROM produto
-            WHERE id_usuario = $id_usuario
-            ORDER BY categoria, nome_produto";
-    
-    $resultado = mysqli_query($conexao, $sql);
+$id_usuario   = intval($_SESSION["id_usuario"]);
+$n_restaurante = htmlspecialchars(trim($_SESSION["usuario_nome_restaurante"]));
 
-    function titulo_categoria($cat) {
-        $categorias = [
-                "entrada"   => "Entradas",
-                "principal" => "Pratos Principais",
-                "bebida"    => "Bebidas",
-                "sobremesa" => "Sobremesas",
-                "combo"     => "Combos"
-        ];
-        return $categorias[$cat] ?? ucfirst($cat);
-    }
+$sql = "SELECT *
+        FROM produto
+        WHERE id_usuario = $id_usuario
+        ORDER BY categoria, nome_produto";
+
+$rslt_refeicao = mysqli_query($conexao, $sql);
+
+function titulo_categoria($cat) {
+    $categorias = [
+        "entrada"   => "Entradas",
+        "principal" => "Pratos Principais",
+        "bebida"    => "Bebidas",
+        "sobremesa" => "Sobremesas",
+        "combo"     => "Combos"
+    ];
+    return $categorias[$cat] ?? ucfirst($cat);
+}
 ?>
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>World Foods - Refeições Cadastradas</title>
-        <link rel="stylesheet" href="../css/style.css">
-    </head>
+<header class="header-cardapio">
+    <h1>Cardápio de <strong><?= $n_restaurante ?></strong></h1>
+    <div class="links-nav">
+        <a href="produto_novo.php" class="btn-nav">Cadastrar nova refeição</a>
+    </div>
+</header>
 
-    <body>
-        <main class="container">
-            <header>
-                <h1>Refeições de <strong><?= $n_restaurante ?></strong></h1>
-                <nav class="links-nav">
-                    <a href="../admin/produto_novo.php" class="btn-nav">Cadastrar nova refeição</a>
-                    <a href="../admin/painel.php" class="btn-nav">Voltar ao Painel</a>
-                </nav>
-            </header>
+<section class="cardapio-corpo">
+<?php
+if (!$rslt_refeicao || mysqli_num_rows($rslt_refeicao) == 0):
+?>
+    <div class="error-msg">
+        <p>Seu cardápio ainda está vazio.</p>
+    </div>
+<?php
+else:
+    $categoria_atual = "";
+    while ($refeicao = mysqli_fetch_assoc($rslt_refeicao)):
 
-            <?php
-            if(!$resultado || mysqli_num_rows($resultado) == 0): 
-            ?>
+        if ($categoria_atual !== $refeicao["categoria"]):
+            $categoria_atual = $refeicao["categoria"];
+            echo "<h2 class='titulo-categoria'>" . titulo_categoria($categoria_atual) . "</h2>";
+        endif;
+?>
+    <article class="card-item-lista">
 
-            <section class="sem-dados">
-                <p>Seu cardápio ainda está vazio.</p>
-                <a href='../admin/produto_novo.php' class="btn-nav">Cadastrar primeira refeição</a>
-            </section>
+        <?php if (!empty($refeicao["imagem_produto"])): ?>
+            <div class="foto-produto-container">
+                <img
+                    src="<?= htmlspecialchars($refeicao["imagem_produto"]) ?>"
+                    alt="Foto de <?= htmlspecialchars($refeicao["nome_produto"]) ?>"
+                    loading="lazy"
+                >
+            </div>
+        <?php endif; ?>
 
-            <?php        
-            else:
-                $cat_atual = "";
-                while($p = mysqli_fetch_assoc($resultado)):
-                    if($cat_atual != $p["categoria"]):
-                        if($cat_atual != "") {
-                            echo "</div></section>";
-                        }
+        <div class="detalhes-produto">
+            <h3><?= htmlspecialchars($refeicao["nome_produto"]) ?></h3>
+            <p class="descricao-prod"><?= htmlspecialchars($refeicao["descricao"]) ?></p>
+            <p class="valor-prod">
+                R$ <?= number_format($refeicao["preco"], 2, ",", ".") ?>
+            </p>
+        </div>
 
-                        $cat_atual = $p["categoria"];
-            ?>
-
-            <section class="faixa-categoria">
-                <h2><?= titulo_categoria($cat_atual) ?></h2>
-                <div class="lista-reficoes">
-
-                    <?php
-                    endif;
-
-                    $id_produto = intval($p["id_produto"]);
-                    $n_produto = htmlspecialchars($p["nome_produto"]);
-                    $img_produto = htmlspecialchars($p["imagem_produto"]);
-                    $preco = number_format(floatval($p["preco"]), 2, ",", ".");
-                    $disp = ((int)$p["disponibilidade"] == 1) ? "Disponível" : "Indisponível";
-                    $classe_disp = ((int)$p["disponibilidade"] == 1) ? "status-on" : "status-off";
-                    ?>
-
-                        <article class="card-item-lista">
-                            <div class="detalhes-produto">
-                                <h3><?= $n_produto ?></h3>
-                                <p class="valor-prod">R$ <?= $preco ?></p>
-                                <span class="tag <?= $classe_disp ?>"><?= $disp ?></span>
-                                
-                                <div class="btn-acoes">
-                                    <a href="../admin/produto_editar.php?id=<?= $id_produto ?>" class="btn-nav">Editar</a>
-                                    <form action="../admin/produto_excluir.php" method="POST" class="form-excluir">
-                                        <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
-                                        <button type="submit" class="btn-excluir" onclick="return confirm('Excluir <?= $n_produto ?>?');">Excluir</button>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <div class="foto-produto-container">
-                                <img src="<?= $img_produto ?>" alt="Foto de <?= $n_produto ?>" loading="lazy">
-                            </div>
-                        </article>
-
-                    <?php
-                    endwhile;
-
-                    if(!empty($cat_atual)) {
-                    ?>
-
-                </div>
-            </section>
-            
-                    <?php 
-                    }
-                    endif;
-                    ?>
-
-            <footer>
-                <p><b>World Foods - Explore o mundo da culinária</b></p>
-                <p>Desenvolvido por Rafael Arcangelo</p>
-            </footer>
-
-        </main>
-
-        <?php
-            desconecta($conexao);
-        ?>
+        <div class="acoes-admin">
+            <button class="btn-nav" type="button" onclick="location.href='../admin/produto_editar.php?id=<?= $refeicao["id_produto"] ?>'" class="btn-excluir">Editar</button>
         
-    </body>
-</html>
+            <form action="../admin/produto_excluir.php" method="POST" class="form-inline">
+                <input type="hidden" name="id_produto" value="<?= $refeicao["id_produto"] ?>">
+                <button class="btn-excluir" type="submit" onclick="return confirm('Deseja realmente excluir este item?');">Excluir</button>
+            </form>
+        </div>
+
+    </article>
+<?php
+    endwhile;
+endif;
+?>
+</section>
+
+<?php
+include "../public/footer.php";
+?>

@@ -1,10 +1,16 @@
 <?php 
     require_once __DIR__ . "/../config/auth.php";
-    require_once __DIR__ . "/../config/db.php";
-    $conexao = conecta();
+
+    $t_pagina = "Atualizar refeição";
+    include "../admin/header_auth.php";
 
     if(!isset($_POST["id_produto"])) {
-        die("acesso inválido.");
+        echo 
+            "<div class='error-msg'>
+                <p><strong>ACESSO INVÁLIDO.</strong></p>
+            </div>";  
+        include "../public/footer.php";
+        exit;
     }
 
     $id_produto = intval($_POST["id_produto"]);
@@ -21,11 +27,22 @@
     }
 
     if(empty($n_refeicao) || empty($categoria) || empty($descricao) || $preco <= 0) {
-        die("Todos os campos são obrigatórios e o preço deve ser maior que 0.");
+        echo 
+            "<div class='error-msg'>
+                <p><strong>Todos os campos são obrigatórios e o preço deve ser maior que 0.</strong></p>
+            </div>";  
+        include "../public/footer.php";
+        exit;
     }
 
-    if (strlen($n_refeicao) < 3) 
-        die("Nome deve ter ao menos 3 caracteres.");
+    if (strlen($n_refeicao) < 3) {
+        echo 
+            "<div class='error-msg'>
+                <p><strong>Nome deve ter ao menos 3 caracteres.</strong></p>
+            </div>";  
+        include "../public/footer.php";
+        exit;
+    }
 
     $n_refeicao = mysqli_real_escape_string($conexao, $n_refeicao);
     $categoria = mysqli_real_escape_string($conexao, $categoria);
@@ -45,44 +62,32 @@
     if(mysqli_query($conexao, $sql)) {
 
         if(mysqli_affected_rows($conexao) == 0) {
-            die("Produto não encontrado ou você não tem permissão para atualizar ou não foram encontradas alterações.");
+            echo 
+            "<div class='error-msg'>
+                <p><strong>Produto não encontrado ou sem alterções efetuadas.</strong></p>
+            </div>";  
+        include "../public/footer.php";
+        exit;
         }
 ?>
 
-    <!DOCTYPE html>
-    <html lang="pt-BR">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>World Foods - Refeição Atualizada</title>
-            <link rel="stylesheet" href="../css/style.css">
-        </head>
-
-        <body>
-            <main class="container">
-                <header>
-                    <h1>Atualizado com sucesso!</h1>
-                    <p>Refeição <strong><?= htmlspecialchars($n_refeicao) ?></strong> atualizada no cardápio!</p>
-                </header>
-
-                <section class="links-sucesso">
-                    <a href='../admin/produto_listar.php' class="btn-nav">Ver refeições cadastradas</a>
-                    <a href='../admin/painel.php' class="btn-nav">Voltar ao Painel</a>                
-                </section>
-
-                <footer>
-                    <a href="../public/logout.php" class="btn-excluir" onclick="return confirm('Tem certeza que deseja sair?')">Sair do Sistema</a>
-                    <p><b>World Foods - Explore o mundo da culinária</b></p>
-                    <p>Desenvolvido por Rafael Arcangelo</p>
-                </footer>
-            </main>
-        </body>
-    </html>
+<header>
+    <h3>Refeição <strong><?= htmlspecialchars($n_refeicao) ?></strong> atualizada com sucesso!</h3>
+    <br>
+    <p>Retornando ao cardápio em 3 seg...</p>
+    <meta 
+</header>
 
 <?php
     } else {
-        echo "Erro ao atualizar: " . mysqli_error($conexao);
+        echo 
+            "<div class='error-msg'>
+                <p><strong>Erro ao atualizar: " . mysqli_error($conexao). "</strong></p>
+            </div>";  
+        include "../public/footer.php";
+        exit;
     }
 
-    desconecta($conexao);
+    include "../public/footer.php";
+    header("Refresh: 3; url=../admin/produto_listar.php");
 ?>
