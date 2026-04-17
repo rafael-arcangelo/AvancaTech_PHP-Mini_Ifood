@@ -25,7 +25,7 @@
     $senha = $senha1;
 
     if(empty($img_restaurante)) {
-        $img_restaurante = "https://cdn-icons-png.flaticon.com/512/4722/4722865.png";
+        $img_restaurante = "https://i.ibb.co/G3pLpm9F/Logo-Default.png";
     }
 
     if ($senha1 !== $senha2) {
